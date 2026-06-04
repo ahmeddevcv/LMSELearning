@@ -1,0 +1,112 @@
+{
+  "common": {
+    "save": "Save", "cancel": "Cancel", "delete": "Delete", "edit": "Edit",
+    "add": "Add", "create": "Create", "update": "Update", "confirm": "Confirm",
+    "close": "Close", "back": "Back", "next": "Next", "previous": "Previous",
+    "search": "Search", "filter": "Filter", "loading": "Loading...",
+    "noData": "No data available", "error": "An error occurred", "retry": "Retry",
+    "actions": "Actions", "viewAll": "View All", "yes": "Yes", "no": "No",
+    "active": "Active", "inactive": "Inactive", "status": "Status", "date": "Date",
+    "time": "Time", "name": "Name", "email": "Email", "phone": "Phone",
+    "submit": "Submit", "from": "From", "to": "To", "total": "Total",
+    "of": "of", "page": "Page", "showing": "Showing", "results": "results"
+  },
+  "nav": {
+    "dashboard": "Dashboard", "teachers": "Teachers", "supervisors": "Supervisors",
+    "students": "Students", "groups": "Groups", "subjects": "Subjects",
+    "subscriptions": "Subscriptions", "payments": "Payments", "compensation": "Compensation",
+    "reports": "Reports", "news": "News", "messages": "Messages", "settings": "Settings",
+    "logout": "Logout", "profile": "Profile", "myGroups": "My Groups",
+    "sessions": "Sessions", "assignments": "Assignments", "recordings": "Recordings",
+    "myReports": "My Reports", "children": "Children", "schedules": "Schedules"
+  },
+  "auth": {
+    "login": "Login", "logout": "Logout", "email": "Email", "password": "Password",
+    "forgotPassword": "Forgot Password?", "noAccount": "Don't have an account?",
+    "subscribeNow": "Subscribe Now", "invalidCredentials": "Invalid credentials",
+    "welcome": "Welcome Back", "adminLogin": "Admin Login", "teacherLogin": "Teacher Login",
+    "studentLogin": "Student Login", "parentLogin": "Parent Login"
+  },
+  "groups": {
+    "title": "Groups", "create": "Create Group", "name": "Group Name",
+    "description": "Description", "teacher": "Teacher", "subject": "Subject",
+    "gradeLevel": "Grade Level", "curriculum": "Curriculum", "members": "Members",
+    "students": "Students", "inviteLink": "Invite Link", "copyLink": "Copy Link",
+    "regenerateLink": "Regenerate Link", "joinGroup": "Join Group",
+    "leaveGroup": "Leave Group", "chat": "Chat", "videos": "Recordings",
+    "noGroups": "No groups yet", "maxReached": "Maximum group limit reached (400)"
+  },
+  "sessions": {
+    "title": "Sessions", "schedule": "Schedule Session", "start": "Start Session",
+    "end": "End Session", "join": "Join Session", "live": "Live Now",
+    "scheduled": "Scheduled", "ended": "Ended", "duration": "Duration",
+    "meetLink": "Meeting Link", "recording": "Recording", "attendance": "Attendance",
+    "rating": "Rating", "rate": "Rate Session", "ratingPlaceholder": "How was the session?",
+    "present": "Present", "absent": "Absent", "late": "Late",
+    "noSessions": "No sessions", "minutes": "minutes",
+    "reminder": "Reminder: Session starts in 15 minutes"
+  },
+  "assignments": {
+    "title": "Assignments", "create": "Create Assignment", "publish": "Publish",
+    "submit": "Submit", "deadline": "Deadline", "totalMarks": "Total Marks",
+    "myScore": "My Score", "grade": "Grade", "questions": "Questions",
+    "addQuestion": "Add Question", "questionType": "Question Type",
+    "mcq": "Multiple Choice", "trueFalse": "True / False",
+    "fillBlank": "Fill in the Blank", "shortAnswer": "Short Answer",
+    "matching": "Matching", "answer": "Answer", "correctAnswer": "Correct Answer",
+    "marks": "Marks", "draft": "Draft", "published": "Published", "closed": "Closed",
+    "pending": "Pending", "submitted": "Submitted", "autoGraded": "Auto-graded",
+    "noAssignments": "No assignments", "timeRemaining": "Time Remaining",
+    "submittedSuccess": "Assignment submitted successfully",
+    "results": "Results", "percentage": "Percentage"
+  },
+  "subscriptions": {
+    "title": "Subscriptions", "active": "Active", "expired": "Expired",
+    "gracePeriod": "Grace Period", "cancelled": "Cancelled",
+    "startDate": "Start Date", "endDate": "End Date",
+    "renew": "Renew Subscription", "cancel": "Cancel Subscription",
+    "grantFree": "Grant Free Subscription", "expiringSoon": "Subscription Expiring Soon",
+    "expired_msg": "Your subscription has expired. Renew now to continue.",
+    "noSubscriptions": "No subscriptions", "checkout": "Checkout",
+    "paymentSuccess": "Payment Successful", "paymentCancelled": "Payment Cancelled"
+  },
+  "reports": {
+    "title": "Reports", "monthly": "Monthly Report", "attendance": "Attendance",
+    "assignments": "Assignments", "quizzes": "Quizzes", "participation": "Participation",
+    "overall": "Overall", "recommendation": "Recommendation", "grade": "Grade",
+    "noReports": "No reports yet", "generate": "Generate Report"
+  },
+  "notifications": {
+    "title": "Notifications", "markAllRead": "Mark All Read",
+    "noNotifications": "No notifications", "unread": "Unread",
+    "sessionReminder": "Session Reminder", "assignmentNew": "New Assignment",
+    "assignmentResult": "Assignment Result", "paymentSuccess": "Payment Success",
+    "subscriptionExpiring": "Subscription Expiring", "reportReady": "Report Ready"
+  },
+  "chat": {
+    "title": "Chat", "typeMessage": "Type a message...", "send": "Send",
+    "uploadFile": "Upload File", "image": "Image", "document": "Document",
+    "audio": "Audio", "noMessages": "No messages yet", "today": "Today", "yesterday": "Yesterday"
+  },
+  "videos": {
+    "title": "Recordings", "watch": "Watch", "duration": "Duration",
+    "processing": "Processing...", "noVideos": "No recordings",
+    "restricted": "This video is available to subscribers only"
+  },
+  "validation": {
+    "required": "This field is required", "email": "Invalid email format",
+    "minLength": "Minimum {{ min }} characters", "maxLength": "Maximum {{ max }} characters",
+    "phone": "Invalid phone number (must start with 01)",
+    "passwordMatch": "Passwords do not match",
+    "min": "Minimum value is {{ min }}", "max": "Maximum value is {{ max }}"
+  },
+  "grades": {
+    "KG1": "KG1", "KG2": "KG2", "Grade1": "Grade 1", "Grade2": "Grade 2",
+    "Grade3": "Grade 3", "Grade4": "Grade 4", "Grade5": "Grade 5", "Grade6": "Grade 6",
+    "Grade7": "Grade 7", "Grade8": "Grade 8", "Grade9": "Grade 9",
+    "Grade10": "Grade 10", "Grade11": "Grade 11", "Grade12": "Grade 12"
+  },
+  "curricula": {
+    "Egyptian": "Egyptian", "Gulf": "Gulf", "IG": "IG", "American": "American"
+  }
+}

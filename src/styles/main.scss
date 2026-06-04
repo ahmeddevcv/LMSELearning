@@ -1,0 +1,979 @@
+// ═══════════════════════════════════════════
+// GLOBAL STYLES — Bootstrap overrides + custom
+// ═══════════════════════════════════════════
+
+// ── Base reset & typography ─────────────────
+* { box-sizing: border-box; }
+
+html[dir="rtl"] body {
+  font-family: 'Cairo', 'Tajawal', sans-serif;
+  text-align: right;
+}
+html[dir="ltr"] body {
+  font-family: 'Inter', sans-serif;
+  text-align: left;
+}
+
+body {
+  background-color: var(--surface-2);
+  color: var(--text-primary);
+  // Smooth theme switch across the whole page
+  transition: background-color 0.35s ease, color 0.35s ease;
+  min-height: 100vh;
+}
+
+// Surface elements that change with the theme should fade-cross too
+.card, .modal-content, .lms-sidebar, .lms-header, .lms-content,
+.stat-card, .dropdown-menu, .group-card, .lms-toast {
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s cubic-bezier(.2,.7,.3,1);
+}
+
+// Scrollbar
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--surface-3); }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+// ── Bootstrap overrides ─────────────────────
+.btn {
+  border-radius: var(--border-radius) !important;
+  font-weight: 500;
+  transition: var(--transition) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-primary {
+  background-color: var(--lms-primary) !important;
+  border-color: var(--lms-primary) !important;
+  &:hover { background-color: var(--lms-primary-dark) !important; }
+}
+
+.card {
+  border-radius: var(--border-radius-lg) !important;
+  border: 1px solid var(--border-color) !important;
+  background: var(--surface) !important;
+  // Bootstrap defaults .card to var(--bs-body-color) which doesn't follow our theme.
+  // Pin to our token so headers/body stay readable in dark mode.
+  color: var(--text-primary) !important;
+  box-shadow: var(--shadow-sm);
+}
+.card-header {
+  background: var(--surface) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  font-weight: 600;
+}
+.card-body { color: var(--text-primary); }
+
+.form-control, .form-select {
+  border-radius: var(--border-radius) !important;
+  border-color: var(--border-color) !important;
+  background: var(--surface) !important;
+  color: var(--text-primary) !important;
+  &:focus {
+    border-color: var(--lms-primary) !important;
+    box-shadow: 0 0 0 3px rgba(var(--lms-primary-rgb), .15) !important;
+  }
+  &::placeholder { color: var(--text-muted) !important; }
+}
+
+.modal-content {
+  border-radius: var(--border-radius-xl) !important;
+  border: none !important;
+  background: var(--surface) !important;
+  box-shadow: var(--shadow-xl);
+}
+.modal-header {
+  border-bottom: 1px solid var(--border-color) !important;
+  background: var(--surface) !important;
+}
+.modal-footer {
+  border-top: 1px solid var(--border-color) !important;
+  background: var(--surface) !important;
+}
+
+.table {
+  color: var(--text-primary) !important;
+  --bs-table-bg: var(--surface);
+  --bs-table-color: var(--text-primary);
+  --bs-table-striped-bg: var(--surface-2);
+  --bs-table-striped-color: var(--text-primary);
+  --bs-table-hover-bg: var(--surface-3);
+  --bs-table-hover-color: var(--text-primary);
+  --bs-table-border-color: var(--border-color);
+  margin-bottom: 0;
+
+  thead th {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary) !important;
+    background: var(--surface-2) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    padding: 12px 16px;
+  }
+  tbody td {
+    padding: 12px 16px;
+    border-color: var(--border-color) !important;
+    vertical-align: middle;
+    color: var(--text-primary);
+  }
+  tbody tr {
+    transition: background-color .15s ease;
+  }
+}
+
+.badge { border-radius: 8px !important; font-weight: 500; }
+
+.dropdown-menu {
+  border-radius: var(--border-radius-lg) !important;
+  border: 1px solid var(--border-color) !important;
+  background: var(--surface) !important;
+  box-shadow: var(--shadow-lg);
+}
+.dropdown-item { color: var(--text-primary) !important; border-radius: 8px; margin: 2px 4px; width: calc(100% - 8px);
+  &:hover { background: var(--surface-3) !important; } }
+
+.nav-tabs {
+  border-bottom: 2px solid var(--border-color);
+  .nav-link { color: var(--text-secondary) !important; border: none !important; border-radius: 0 !important; padding-bottom: 10px;
+    &.active { color: var(--lms-primary) !important; border-bottom: 2px solid var(--lms-primary) !important; margin-bottom: -2px; font-weight: 600; background: none !important; }
+    &:hover:not(.active) { color: var(--text-primary) !important; background: none !important; }
+  }
+}
+
+.alert { border-radius: var(--border-radius-lg) !important; }
+
+.pagination .page-link {
+  border-radius: 8px !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+  background: var(--surface) !important;
+  &:hover { background: var(--surface-3) !important; }
+}
+.pagination .page-item.active .page-link {
+  background: var(--lms-primary) !important;
+  border-color: var(--lms-primary) !important;
+  color: #fff !important;
+}
+
+// ── Layout ───────────────────────────────────
+.lms-wrapper { display: flex; min-height: 100vh; }
+
+// Sidebar
+.lms-sidebar {
+  width: var(--sidebar-width);
+  min-height: 100vh;
+  background: var(--surface);
+  border-inline-end: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 1040;
+  transition: width 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
+
+  &.collapsed {
+    width: var(--sidebar-collapsed-width);
+    .nav-label, .brand-text, .user-name, .user-role { display: none; }
+    .nav-item-text { display: none; }
+  }
+}
+[dir="rtl"] .lms-sidebar { right: 0; left: auto; border-inline-end: none; border-inline-start: 1px solid var(--border-color); }
+[dir="ltr"] .lms-sidebar { left: 0; right: auto; }
+
+.lms-main {
+  flex: 1;
+  // Without this, the flex item keeps its default min-width:auto and refuses to
+  // shrink below its content's intrinsic width — so wide tables push the whole page
+  // (horizontal overflow) between ~768px and ~1330px instead of scrolling inside
+  // their .table-responsive wrapper. min-width:0 lets it shrink with the viewport.
+  min-width: 0;
+  transition: margin 0.3s ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+[dir="rtl"] .lms-main { margin-right: var(--sidebar-width); margin-left: 0; }
+[dir="ltr"] .lms-main { margin-left: var(--sidebar-width); margin-right: 0; }
+
+[dir="rtl"] .lms-main.sidebar-collapsed { margin-right: var(--sidebar-collapsed-width); }
+[dir="ltr"] .lms-main.sidebar-collapsed { margin-left: var(--sidebar-collapsed-width); }
+
+.lms-header {
+  height: var(--header-height);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+}
+
+.lms-content {
+  flex: 1;
+  min-width: 0;
+  // Clip minor horizontal spillover (e.g. Bootstrap row negative gutters at the
+  // 768px breakpoint edge) so the page never gets a horizontal scrollbar. Wide
+  // tables are unaffected — they scroll inside their own .table-responsive wrapper.
+  overflow-x: clip;
+  padding: 24px;
+  background: var(--surface-2);
+}
+
+// Sidebar brand
+.sidebar-brand {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  border-bottom: 1px solid var(--border-color);
+  text-decoration: none;
+}
+.brand-icon {
+  width: 36px; height: 36px; min-width: 36px;
+  background: var(--lms-primary);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 1rem;
+}
+.brand-text { font-weight: 700; font-size: 0.95rem; color: var(--text-primary); white-space: nowrap; }
+
+// Sidebar nav
+.sidebar-nav { flex: 1; overflow-y: auto; padding: 12px 8px; }
+.nav-section-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  padding: 12px 10px 4px;
+  white-space: nowrap;
+}
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  border: none;
+  background: none;
+  width: 100%;
+
+  i { font-size: 1.15rem; min-width: 20px; text-align: center; }
+
+  &:hover { background: var(--surface-3); color: var(--text-primary); }
+  &.active { background: var(--lms-primary-light); color: var(--lms-primary); font-weight: 600; }
+}
+
+// Sidebar user footer
+.sidebar-user {
+  padding: 12px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.user-avatar {
+  width: 36px; height: 36px; min-width: 36px;
+  border-radius: 50%;
+  background: var(--lms-primary-light);
+  color: var(--lms-primary);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.875rem;
+  overflow: hidden;
+  img { width: 100%; height: 100%; object-fit: cover; }
+}
+.user-name  { font-weight: 600; font-size: 0.8rem; color: var(--text-primary); line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
+.user-role  { font-size: 0.7rem; color: var(--text-muted); white-space: nowrap; }
+
+// ── Custom cards & stats ─────────────────────
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  &:hover { box-shadow: var(--shadow); transform: translateY(-1px); }
+}
+.stat-icon {
+  width: 52px; height: 52px; min-width: 52px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+}
+.stat-value  { font-size: 1.6rem; font-weight: 700; color: var(--text-primary); line-height: 1; }
+.stat-label  { font-size: 0.8rem; color: var(--text-secondary); margin-top: 3px; }
+
+// ── Section header ────────────────────────────
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.section-title { font-size: 1.3rem; font-weight: 700; color: var(--text-primary); margin: 0; }
+.section-subtitle { font-size: 0.83rem; color: var(--text-secondary); margin-top: 2px; }
+
+// ── Status badges ────────────────────────────
+.badge-active    { background: var(--lms-success-light); color: #15803d; }
+.badge-inactive  { background: var(--surface-3); color: var(--text-muted); }
+.badge-live      { background: #fee2e2; color: #dc2626; }
+.badge-scheduled { background: var(--lms-primary-light); color: var(--lms-primary); }
+.badge-warning   { background: var(--lms-warning-light); color: #92400e; }
+.badge-info      { background: var(--lms-info-light); color: #1e40af; }
+
+// ── Chat bubbles ─────────────────────────────
+.chat-area { height: calc(100vh - 340px); min-height: 300px; overflow-y: auto; padding: 16px; }
+.bubble-out {
+  background: var(--lms-primary);
+  color: #fff;
+  border-radius: 16px 16px 4px 16px;
+  padding: 10px 14px;
+  max-width: 68%;
+  margin-inline-start: auto;
+  font-size: 0.875rem;
+  word-break: break-word;
+}
+.bubble-in {
+  background: var(--surface-3);
+  color: var(--text-primary);
+  border-radius: 16px 16px 16px 4px;
+  padding: 10px 14px;
+  max-width: 68%;
+  font-size: 0.875rem;
+  word-break: break-word;
+}
+[dir="rtl"] .bubble-out { border-radius: 16px 16px 16px 4px; }
+[dir="rtl"] .bubble-in  { border-radius: 16px 16px 4px 16px; }
+
+// ── Toast ─────────────────────────────────────
+.toast-container-fixed {
+  position: fixed;
+  top: 16px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+[dir="rtl"] .toast-container-fixed { right: 16px; left: auto; }
+[dir="ltr"] .toast-container-fixed { right: 16px; left: auto; }
+
+.lms-toast {
+  pointer-events: all;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--border-radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  border-inline-start: 4px solid;
+  min-width: 280px;
+  max-width: 360px;
+  animation: toastIn 0.25s ease;
+
+  &.toast-success { border-color: var(--lms-success); }
+  &.toast-error   { border-color: var(--lms-danger); }
+  &.toast-warning { border-color: var(--lms-warning); }
+  &.toast-info    { border-color: var(--lms-info); }
+}
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ── Skeleton ─────────────────────────────────
+.skeleton {
+  background: linear-gradient(90deg, var(--surface-3) 25%, var(--border-color) 50%, var(--surface-3) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+// ── Video player ─────────────────────────────
+.video-overlay {
+  position: fixed; inset: 0; z-index: 2000;
+  background: #000;
+  display: flex; flex-direction: column;
+}
+.video-overlay-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 20px; background: rgba(0,0,0,.5);
+  color: #fff;
+}
+
+// ── Utilities ────────────────────────────────
+.cursor-pointer { cursor: pointer; }
+.text-truncate-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.gap-2  { gap: 8px !important; }
+.gap-3  { gap: 12px !important; }
+.lh-1   { line-height: 1 !important; }
+
+// Avatar circle
+.avatar {
+  width: 38px; height: 38px; min-width: 38px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.875rem;
+  background: var(--lms-primary-light);
+  color: var(--lms-primary);
+  overflow: hidden;
+  img { width: 100%; height: 100%; object-fit: cover; }
+}
+.avatar-lg { width: 52px; height: 52px; min-width: 52px; font-size: 1.1rem; }
+
+// Group card
+.group-card {
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: 20px;
+  transition: var(--transition);
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  color: inherit;
+  &:hover { box-shadow: var(--shadow); border-color: var(--lms-primary); color: inherit; }
+}
+.group-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--lms-primary), var(--lms-primary-dark));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 1.1rem;
+}
+
+// Connection status dot
+.conn-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  display: inline-block;
+  &.connected    { background: var(--lms-success); }
+  &.disconnected { background: var(--text-muted); }
+  &.connecting   { background: var(--lms-warning); animation: pulse 1s infinite; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; } 50% { opacity: .4; }
+}
+
+// Page fade-in
+.page-fade { animation: pageFade 0.2s ease; }
+@keyframes pageFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+// Mobile sidebar overlay
+.sidebar-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 1039;
+  background: rgba(0,0,0,.5);
+  &.show { display: block; }
+}
+
+// Responsive
+@media (max-width: 767.98px) {
+  .lms-sidebar {
+    transform: translateX(-100%);
+    &.mobile-open { transform: translateX(0); }
+    &.collapsed { transform: translateX(-100%); }
+  }
+  [dir="rtl"] .lms-sidebar {
+    transform: translateX(100%);
+    &.mobile-open { transform: translateX(0); }
+  }
+  [dir="rtl"] .lms-main { margin-right: 0 !important; }
+  [dir="ltr"] .lms-main { margin-left: 0 !important; }
+  .lms-content { padding: 16px; }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// RESPONSIVE DATA TABLES → stacked cards on mobile (≤767px).
+// Opt-in: add `.table-cards` to the <table>. Every data <td> needs an
+// [attr.data-label] (mirrors its column header); the trailing actions cell
+// uses `.cell-actions`, and the "no data" cell uses `.cell-empty`.
+// Reuses theme tokens so dark mode + RTL (text-align:start) work automatically.
+// ═══════════════════════════════════════════════════════════════════════════
+@media (max-width: 767.98px) {
+  .table-cards { min-width: 0 !important; }
+  .table-cards thead { display: none; }
+  .table-cards tbody,
+  .table-cards tr,
+  .table-cards td { display: block; width: 100%; }
+
+  .table-cards tbody tr {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    background: var(--surface);
+    margin-bottom: 12px;
+    padding: 6px 14px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .table-cards td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 0 !important;
+    border: 0 !important;
+    text-align: start;
+  }
+  .table-cards td:not(:last-child) { border-bottom: 1px dashed var(--border-color) !important; }
+
+  // Column label — only rendered when the cell carries a data-label
+  .table-cards td[data-label]::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: .75rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  // Trailing CRUD buttons: own row, aligned to the end, wrapping.
+  // Works whether buttons are wrapped in a <div> or are direct children of the cell.
+  .table-cards td.cell-actions {
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 6px;
+    border-top: 1px solid var(--border-color) !important;
+    margin-top: 4px;
+    padding-top: 10px !important;
+  }
+  .table-cards td.cell-actions > div { width: 100%; justify-content: flex-end; flex-wrap: wrap; }
+
+  .table-cards td.cell-empty { justify-content: center; }
+
+  // Pagination — wrap + center on narrow screens
+  .pagination { flex-wrap: wrap; justify-content: center; }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PHONE POLISH (≤575.98px) — tighten dashboard stat cards, header, section title
+// so the 2-up stat grid stays clean and header controls don't crowd at ~360px.
+// ═══════════════════════════════════════════════════════════════════════════
+@media (max-width: 575.98px) {
+  .lms-content { padding: 12px; }
+  .lms-header  { padding: 0 12px; gap: 8px; }
+
+  .section-title    { font-size: 1.15rem; }
+  .section-subtitle { font-size: .78rem; }
+
+  .stat-card  { padding: 14px; gap: 12px; }
+  .stat-icon  { width: 44px; height: 44px; min-width: 44px; border-radius: 12px; }
+  .stat-icon .fs-4 { font-size: 1.2rem !important; }
+  .stat-value { font-size: 1.35rem; }
+  .stat-label { font-size: .72rem; margin-top: 1px; }
+
+  .quick-action-tile { padding: 10px; font-size: .8rem; }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// THEME-AWARE STAT ICONS — replace hardcoded inline backgrounds (#dbeafe etc.)
+// Each variant has both a tinted bg and a saturated foreground that stay
+// readable in light AND dark modes.
+// ═══════════════════════════════════════════════════════════════════════════
+.stat-icon-primary { background: var(--lms-primary-light); color: var(--lms-primary); }
+.stat-icon-success { background: var(--lms-success-light); color: var(--lms-success); }
+.stat-icon-warning { background: var(--lms-warning-light); color: var(--lms-warning); }
+.stat-icon-danger  { background: var(--lms-danger-light);  color: var(--lms-danger);  }
+.stat-icon-info    { background: var(--lms-info-light);    color: var(--lms-info);    }
+.stat-icon-accent  { background: var(--lms-accent-light);  color: var(--lms-accent);  }
+
+// Quick-action tile — pure CSS hover (replaces brittle inline onmouseover handlers)
+.quick-action-tile {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--surface);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: .85rem;
+  font-weight: 500;
+  transition: border-color .2s ease, background .2s ease, transform .2s cubic-bezier(.2,.7,.3,1);
+  cursor: pointer;
+  &:hover {
+    border-color: var(--lms-primary);
+    background: var(--lms-primary-light);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// DARK MODE — extended overrides for Bootstrap utilities + edge cases
+// ═══════════════════════════════════════════════════════════════════════════
+[data-theme="dark"] {
+  // Bootstrap base CSS variables — keep all Bootstrap components on-theme
+  --bs-body-bg: var(--surface-2);
+  --bs-body-color: var(--text-primary);
+  --bs-border-color: var(--border-color);
+  --bs-secondary-color: var(--text-secondary);
+  --bs-tertiary-color: var(--text-muted);
+  --bs-secondary-bg: var(--surface-3);
+  --bs-tertiary-bg: var(--surface-3);
+
+  // Bootstrap utility classes that hard-code light colors
+  .bg-white, .bg-light { background-color: var(--surface) !important; }
+  .text-dark           { color: var(--text-primary) !important; }
+  .text-secondary      { color: var(--text-secondary) !important; }
+  .text-muted          { color: var(--text-muted) !important; }
+  .border-bottom, .border-top, .border, .border-start, .border-end {
+    border-color: var(--border-color) !important;
+  }
+  // Modal body/footer text
+  .modal-content, .modal-body, .modal-footer, .modal-header { color: var(--text-primary); }
+  // Section title/subtitle inline-styled spans inherit properly
+  .text-warning { color: #fcd34d !important; }
+  .text-danger  { color: #fca5a5 !important; }
+  .text-success { color: #86efac !important; }
+  .text-info    { color: #93c5fd !important; }
+  .text-primary { color: #c7d2fe !important; }
+
+  // Alerts — soft tinted backgrounds
+  .alert-warning { background: var(--lms-warning-light); color: #fcd34d; border-color: rgba(245,158,11,.35); }
+  .alert-success { background: var(--lms-success-light); color: #86efac; border-color: rgba(34,197,94,.35); }
+  .alert-danger  { background: var(--lms-danger-light);  color: #fca5a5; border-color: rgba(239,68,68,.35); }
+  .alert-info    { background: var(--lms-info-light);    color: #93c5fd; border-color: rgba(59,130,246,.35); }
+
+  // Status badges — re-tint to keep contrast against dark surface
+  .badge-active    { background: var(--lms-success-light); color: #86efac; }
+  .badge-inactive  { background: var(--surface-3);         color: var(--text-secondary); }
+  .badge-live      { background: var(--lms-danger-light);  color: #fca5a5; }
+  .badge-scheduled { background: var(--lms-primary-light); color: #c7d2fe; }
+  .badge-warning   { background: var(--lms-warning-light); color: #fcd34d; }
+  .badge-info      { background: var(--lms-info-light);    color: #93c5fd; }
+
+  // Bootstrap inline badge colors (bg-success etc.) — keep them readable
+  .badge.bg-success { background-color: var(--lms-success-light) !important; color: #86efac !important; }
+  .badge.bg-warning { background-color: var(--lms-warning-light) !important; color: #fcd34d !important; }
+  .badge.bg-danger  { background-color: var(--lms-danger-light)  !important; color: #fca5a5 !important; }
+  .badge.bg-info    { background-color: var(--lms-info-light)    !important; color: #93c5fd !important; }
+  .badge.bg-primary { background-color: var(--lms-primary-light) !important; color: #c7d2fe !important; }
+  .badge.bg-secondary { background-color: var(--surface-3) !important; color: var(--text-secondary) !important; }
+
+  // Solid light variants (.btn-light, .bg-light) — Bootstrap keeps these light
+  // even in dark mode; remap to our surface tokens so they blend.
+  .btn-light {
+    background-color: var(--surface-3) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+    &:hover { background-color: var(--surface-elevated) !important; border-color: var(--text-muted) !important; }
+  }
+
+  // Outline buttons — text + border need theme tokens
+  .btn-outline-secondary {
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+    &:hover { background: var(--surface-3) !important; color: var(--text-primary) !important; border-color: var(--text-muted) !important; }
+  }
+  .btn-outline-primary {
+    color: #c7d2fe !important;
+    border-color: var(--lms-primary) !important;
+    &:hover { background: var(--lms-primary) !important; color: #fff !important; }
+  }
+  .btn-outline-danger {
+    color: #fca5a5 !important;
+    border-color: var(--lms-danger) !important;
+    &:hover { background: var(--lms-danger) !important; color: #fff !important; }
+  }
+  .btn-outline-warning {
+    color: #fcd34d !important;
+    border-color: var(--lms-warning) !important;
+    &:hover { background: var(--lms-warning) !important; color: #1f2937 !important; }
+  }
+  .btn-outline-success {
+    color: #86efac !important;
+    border-color: var(--lms-success) !important;
+    &:hover { background: var(--lms-success) !important; color: #fff !important; }
+  }
+  .btn-outline-info {
+    color: #93c5fd !important;
+    border-color: var(--lms-info) !important;
+    &:hover { background: var(--lms-info) !important; color: #fff !important; }
+  }
+
+  // Form controls — checkbox & radio dots
+  .form-check-input {
+    background-color: var(--surface-3);
+    border-color: var(--border-color);
+    &:checked { background-color: var(--lms-primary); border-color: var(--lms-primary); }
+    &:focus { box-shadow: 0 0 0 3px rgba(99,102,241,.25); }
+  }
+
+  // Modal backdrop — slightly darker than Bootstrap default
+  .modal-backdrop.show { opacity: .65; background: #000; }
+
+  // Tables — calibrated for dark surface so striped/hover are visibly distinct
+  // without being harsh. Header sits on a slightly elevated surface so it
+  // separates from page bg, while stripes/hover give a soft row affordance.
+  .table {
+    --bs-table-bg: var(--surface);
+    --bs-table-color: var(--text-primary);
+    --bs-table-striped-bg: #232f44;         // ~3 LU brighter than surface
+    --bs-table-striped-color: var(--text-primary);
+    --bs-table-hover-bg: #273449;           // a touch brighter than stripe
+    --bs-table-hover-color: var(--text-primary);
+    --bs-table-border-color: rgba(255,255,255,.06);
+
+    thead th {
+      background: #1a2332 !important;
+      color: #cbd5e1 !important;
+      border-bottom: 1px solid rgba(255,255,255,.08) !important;
+    }
+    tbody td { border-color: rgba(255,255,255,.05) !important; }
+  }
+
+  // Close button (× in modals/toasts) — Bootstrap default is dark on dark
+  .btn-close { filter: invert(1) grayscale(100%) brightness(2); }
+
+  // Skeleton — softer shimmer on dark
+  .skeleton {
+    background: linear-gradient(90deg, var(--surface-3) 25%, var(--surface-elevated) 50%, var(--surface-3) 75%);
+    background-size: 200% 100%;
+  }
+
+  // Stat card hover lift sits on a slightly elevated surface
+  .stat-card:hover, .group-card:hover { background: var(--surface-elevated); }
+
+  // List-group items: Bootstrap's --bs-list-group-bg defaults to --bs-body-bg
+  // (page background). When the list sits INSIDE a .card the items end up
+  // darker than the card surface and become a blank rectangle. Make them
+  // transparent so they inherit the card's surface.
+  .list-group, .list-group-flush, .list-group-item {
+    background-color: transparent !important;
+    --bs-list-group-bg: transparent;
+    color: var(--text-primary);
+    border-color: var(--border-color) !important;
+  }
+  .list-group-item-action:hover { background-color: var(--surface-3) !important; }
+
+  // Accent colors used as inline `color:var(--lms-success)` on +amount text
+  // stay vivid but slightly desaturated for dark
+  --lms-success: #4ade80;
+  --lms-danger:  #f87171;
+  --lms-warning: #fbbf24;
+  --lms-info:    #60a5fa;
+  --lms-primary: #818cf8;
+  --lms-primary-dark: #6366f1;
+  --lms-accent:  #fb923c;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ANIMATIONS — page entry, stagger, micro-interactions
+// ═══════════════════════════════════════════════════════════════════════════
+
+// Smoother page fade with subtle scale
+.page-fade {
+  animation: pageFade .35s cubic-bezier(.2,.7,.3,1);
+}
+@keyframes pageFade {
+  from { opacity: 0; transform: translateY(8px) scale(.995); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+// Stat cards lift more responsively
+.stat-card {
+  will-change: transform;
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+    border-color: var(--lms-primary);
+  }
+}
+
+// Group card hover gets a soft glow ring in dark
+.group-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+// Staggered entry — apply class to a grid wrapper, children fade in sequentially
+.anim-stagger > * {
+  opacity: 0;
+  animation: rowIn .45s cubic-bezier(.2,.7,.3,1) forwards;
+}
+.anim-stagger > *:nth-child(1) { animation-delay: .03s; }
+.anim-stagger > *:nth-child(2) { animation-delay: .08s; }
+.anim-stagger > *:nth-child(3) { animation-delay: .13s; }
+.anim-stagger > *:nth-child(4) { animation-delay: .18s; }
+.anim-stagger > *:nth-child(5) { animation-delay: .23s; }
+.anim-stagger > *:nth-child(6) { animation-delay: .28s; }
+.anim-stagger > *:nth-child(7) { animation-delay: .33s; }
+.anim-stagger > *:nth-child(8) { animation-delay: .38s; }
+@keyframes rowIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// Theme-toggle icon — smooth rotation when switching modes
+.btn .bi-moon, .btn .bi-sun {
+  display: inline-block;
+  transition: transform .45s cubic-bezier(.4, 1.5, .55, 1), opacity .25s ease;
+}
+.btn:active .bi-moon, .btn:active .bi-sun {
+  transform: rotate(-25deg) scale(.92);
+}
+
+// Button micro-interaction
+.btn {
+  &:active:not(:disabled) { transform: scale(.97); }
+}
+
+// Sidebar nav-item slide indicator on hover
+.sidebar-nav-item {
+  position: relative;
+  overflow: hidden;
+  &::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0;
+    top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    width: 3px; height: 60%;
+    background: var(--lms-primary);
+    border-radius: 0 2px 2px 0;
+    transition: transform .25s cubic-bezier(.2,.7,.3,1);
+  }
+  &.active::before, &:hover::before { transform: translateY(-50%) scaleY(1); }
+}
+[dir="rtl"] .sidebar-nav-item::before { border-radius: 2px 0 0 2px; }
+
+// Number "flash" when stat-value changes (apply class manually if desired)
+.stat-flash { animation: statFlash .6s ease; }
+@keyframes statFlash {
+  0%   { color: var(--lms-primary); transform: scale(1.08); }
+  100% { color: var(--text-primary); transform: scale(1); }
+}
+
+// Bar chart bars — grow-in on load
+.bar-grow { animation: barGrow .7s cubic-bezier(.2,.7,.3,1); transform-origin: bottom; }
+@keyframes barGrow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+// Card "lift" utility (manual opt-in for content cards)
+.card-lift {
+  transition: transform .25s cubic-bezier(.2,.7,.3,1), box-shadow .25s ease, border-color .2s ease;
+  &:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--lms-primary); }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// MODAL ENTRY — scale + slide + fade
+// All admin pages render modals with `<div class="modal fade show d-block">`
+// when their open-state signal flips on. Since the element MOUNTS with
+// `.fade.show` already applied, transitions won't fire — but CSS @keyframes
+// will, automatically, on mount. So we use keyframes scoped to .show.
+// ═══════════════════════════════════════════════════════════════════════════
+.modal.fade.show > .modal-dialog {
+  animation: modalEnter .32s cubic-bezier(.2,.7,.3,1);
+}
+@keyframes modalEnter {
+  from { opacity: 0; transform: translateY(-18px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.modal-backdrop.fade.show {
+  animation: backdropEnter .22s ease;
+}
+@keyframes backdropEnter {
+  from { opacity: 0; }
+  to   { opacity: .5; }
+}
+// Dark mode uses a slightly darker backdrop final opacity. We can't nest
+// @keyframes inside a selector, so define a dark-only keyframes and use it.
+[data-theme="dark"] .modal-backdrop.fade.show {
+  animation-name: backdropEnterDark;
+}
+@keyframes backdropEnterDark {
+  from { opacity: 0; }
+  to   { opacity: .65; }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// LIST ROW ENTRY — applies to every <tr> in tables and every list-group item.
+// Re-runs on every render, so when a new item is added to the array it gets
+// the animation for free. `backwards` keeps the row hidden during the small
+// initial delay (no flash).
+// ═══════════════════════════════════════════════════════════════════════════
+.table tbody tr {
+  animation: rowFadeIn .28s ease both;
+}
+@keyframes rowFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.list-group-flush > .list-group-item {
+  animation: rowSlideIn .32s cubic-bezier(.2,.7,.3,1) both;
+}
+@keyframes rowSlideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ROW LEAVING — opt-in class for components that want a fade-out before
+// actually removing the row. Pattern:
+//   row.classList.add('row-leaving');
+//   setTimeout(() => removeFromArray(), 280);
+// ═══════════════════════════════════════════════════════════════════════════
+.row-leaving {
+  animation: rowFadeOut .28s ease forwards !important;
+  pointer-events: none;
+}
+@keyframes rowFadeOut {
+  from { opacity: 1; transform: translateX(0); max-height: 80px; }
+  to   { opacity: 0; transform: translateX(20px); max-height: 0; padding: 0 !important; margin: 0 !important; overflow: hidden; }
+}
+[dir="rtl"] .row-leaving { animation: rowFadeOutRtl .28s ease forwards !important; }
+@keyframes rowFadeOutRtl {
+  from { opacity: 1; transform: translateX(0); max-height: 80px; }
+  to   { opacity: 0; transform: translateX(-20px); max-height: 0; padding: 0 !important; margin: 0 !important; overflow: hidden; }
+}
+
+// Subtle "flash" highlight when a row was just edited — apply class for ~1s
+.row-flash {
+  animation: rowFlash 1s ease;
+}
+@keyframes rowFlash {
+  0%   { background-color: var(--lms-success-light); }
+  100% { background-color: transparent; }
+}
+
+// Respect reduced-motion users — disable non-essential animations
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
