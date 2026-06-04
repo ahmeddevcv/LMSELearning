@@ -10,7 +10,8 @@ import {
   Notification, Video, MonthlyReport, ChatMessage,
   TeacherUser, StudentUser, ParentUser, SupervisorUser, SupervisorPermissionType,
   DashboardStats, TeacherCompensation, News, ContactMessage, User, AdminSubject, AdminSubscription,
-  ParentDashboard, ParentChildSummary, ParentChildDetail, ParentSession
+  ParentDashboard, ParentChildSummary, ParentChildDetail, ParentSession,
+  SupportThread, SupportThreadListItem, SupportThreadStatus
 } from '../models';
 
 const API = environment.apiUrl;
@@ -544,5 +545,43 @@ export class ParentService {
   }
   getSchedules(): Observable<ApiResponse<ParentSession[]>> {
     return this.http.get<ApiResponse<ParentSession[]>>(`${API}/parent/schedules`);
+  }
+}
+
+// ═══════════════════════════════════════════════
+// SUPPORT SERVICE — student ↔ administration threaded messaging
+// ═══════════════════════════════════════════════
+@Injectable({ providedIn: 'root' })
+export class SupportService {
+  private http = inject(HttpClient);
+
+  // ── Student ──
+  myThreads(): Observable<ApiResponse<SupportThreadListItem[]>> {
+    return this.http.get<ApiResponse<SupportThreadListItem[]>>(`${API}/support/my`);
+  }
+  createThread(body: string, subject?: string, childStudentId?: string): Observable<ApiResponse<{ id: string }>> {
+    return this.http.post<ApiResponse<{ id: string }>>(`${API}/support`, { body, subject, childStudentId });
+  }
+  getMyThread(id: string): Observable<ApiResponse<SupportThread>> {
+    return this.http.get<ApiResponse<SupportThread>>(`${API}/support/my/${id}`);
+  }
+
+  // ── Staff (Admin / Supervisor w/ ReplyContactMessages) ──
+  allThreads(page = 1, opts: { status?: string; unreadOnly?: boolean } = {}): Observable<PaginatedResponse<SupportThreadListItem>> {
+    let params = new HttpParams().set('pageNumber', page).set('pageSize', 20);
+    if (opts.status && opts.status !== 'All') params = params.set('status', opts.status);
+    if (opts.unreadOnly) params = params.set('unreadOnly', true);
+    return this.http.get<PaginatedResponse<SupportThreadListItem>>(`${API}/support`, { params });
+  }
+  getThread(id: string): Observable<ApiResponse<SupportThread>> {
+    return this.http.get<ApiResponse<SupportThread>>(`${API}/support/${id}`);
+  }
+  setStatus(id: string, status: SupportThreadStatus): Observable<ApiResponse<void>> {
+    return this.http.put<ApiResponse<void>>(`${API}/support/${id}/status`, { status });
+  }
+
+  // ── Shared ──
+  postMessage(id: string, body: string): Observable<ApiResponse<{ id: string }>> {
+    return this.http.post<ApiResponse<{ id: string }>>(`${API}/support/${id}/messages`, { body });
   }
 }

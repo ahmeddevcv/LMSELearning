@@ -503,6 +503,55 @@ export interface ContactMessage {
 }
 
 // ═══════════════════════════════════════════════
+// SUPPORT THREADS (student ↔ administration)
+// ═══════════════════════════════════════════════
+export type SupportThreadStatus = 'Open' | 'Closed';
+
+export interface SupportThreadListItem {
+  id: string;
+  subject?: string | null;
+  status: SupportThreadStatus;
+  lastMessageAt: string;
+  lastMessageFromStaff: boolean;
+  hasUnread: boolean;
+  lastMessagePreview?: string | null;
+  messagesCount: number;
+  studentId: string;
+  studentNameAr?: string | null;
+  studentNameEn?: string | null;
+  ownerRole?: string | null;          // 'Student' | 'Parent'
+  childStudentId?: string | null;     // parent threads: the child it's about
+  childStudentNameAr?: string | null;
+  childStudentNameEn?: string | null;
+}
+
+export interface SupportMessage {
+  id: string;
+  senderId: string;
+  senderNameAr?: string | null;
+  senderNameEn?: string | null;
+  /** 'Admin' | 'Supervisor' | 'Student' — used to show a role label without leaking staff names to students. */
+  senderRole?: string | null;
+  isFromStaff: boolean;
+  body: string;
+  sentAt: string;
+}
+
+export interface SupportThread {
+  id: string;
+  subject?: string | null;
+  status: SupportThreadStatus;
+  studentId: string;
+  studentNameAr?: string | null;
+  studentNameEn?: string | null;
+  ownerRole?: string | null;          // 'Student' | 'Parent'
+  childStudentId?: string | null;
+  childStudentNameAr?: string | null;
+  childStudentNameEn?: string | null;
+  messages: SupportMessage[];
+}
+
+// ═══════════════════════════════════════════════
 // PARENT MODELS — match the backend ParentController anonymous payloads
 // ═══════════════════════════════════════════════
 export interface ParentChildSubject {

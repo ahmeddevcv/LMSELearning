@@ -124,6 +124,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/profile/profile.component').then(m => m.ProfileComponent),
       },
+      {
+        path: 'support',
+        loadComponent: () =>
+          import('./features/admin/support/support.component').then(m => m.SupportComponent),
+      },
     ]
   },
 
@@ -177,6 +182,11 @@ export const routes: Routes = [
         path: 'contact',
         loadComponent: () =>
           import('./features/admin/contact/contact.component').then(m => m.ContactComponent),
+      },
+      {
+        path: 'support',
+        loadComponent: () =>
+          import('./features/admin/support/support.component').then(m => m.SupportComponent),
       },
       {
         path: 'profile',
@@ -285,6 +295,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/profile/profile.component').then(m => m.ProfileComponent),
       },
+      {
+        path: 'contact',
+        loadComponent: () =>
+          import('./features/student/contact/student-contact.component').then(m => m.StudentContactComponent),
+      },
     ]
   },
 
@@ -315,6 +330,11 @@ export const routes: Routes = [
         path: 'schedules',
         loadComponent: () =>
           import('./features/parent/schedules/schedules.component').then(m => m.SchedulesComponent),
+      },
+      {
+        path: 'contact',
+        loadComponent: () =>
+          import('./features/parent/contact/parent-contact.component').then(m => m.ParentContactComponent),
       },
       {
         path: 'profile',

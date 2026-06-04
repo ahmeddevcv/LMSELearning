@@ -11,6 +11,9 @@ export const environment = {
   //to run the Angular project, use the command:
   // ng serve -o
 
+  //to test the Stripe webhooks locally, use the command:
+  //stripe listen --forward-to localhost:5000/api/webhooks/stripe
+
   // Publishable keys are public by design (safe in the client). Not strictly needed for the
   // server-side redirect Checkout flow, but set for consistency / future Stripe.js use.
   stripePublishableKey: 'pk_test_51OnIQZG3C5uEFs6dT5zG1D0P2nDbDIeIhquy3Cn9CX2vt2eZyhtJTQacXqWgKb0ruGImYv44YZuyjvkCKZoG6JUB00sZ2h2QBI',

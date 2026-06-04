@@ -38,6 +38,7 @@ const NAV: NavItem[] = [
   { labelAr:'التقارير',    labelEn:'Reports',      icon:'bi-bar-chart-line',   route:'/admin/reports',       roles:['Admin'] },
   { labelAr:'الأخبار',     labelEn:'News',         icon:'bi-newspaper',        route:'/admin/news',          roles:['Admin'] },
   { labelAr:'الرسائل',     labelEn:'Messages',     icon:'bi-envelope',         route:'/admin/contact',       roles:['Admin'] },
+  { labelAr:'دعم الطلاب',  labelEn:'Student Support',icon:'bi-headset',        route:'/admin/support',       roles:['Admin'] },
   { labelAr:'الإعدادات',   labelEn:'Settings',     icon:'bi-gear',             route:'/admin/settings',      roles:['Admin'] },
   { labelAr:'الملف الشخصي',labelEn:'Profile',      icon:'bi-person-circle',    route:'/admin/profile',       roles:['Admin'] },
   // Supervisor — dashboard is always visible; sub-pages gated by permissions
@@ -49,6 +50,7 @@ const NAV: NavItem[] = [
   { labelAr:'المدفوعات',   labelEn:'Payments',     icon:'bi-cash-stack',       route:'/supervisor/payments', roles:['Supervisor'], permission:'ViewPayments' },
   { labelAr:'الأخبار',     labelEn:'News',         icon:'bi-newspaper',        route:'/supervisor/news',     roles:['Supervisor'], permission:'ManageContent' },
   { labelAr:'الرسائل',     labelEn:'Messages',     icon:'bi-envelope',         route:'/supervisor/contact',  roles:['Supervisor'], permission:'ReplyContactMessages' },
+  { labelAr:'دعم الطلاب',  labelEn:'Student Support',icon:'bi-headset',        route:'/supervisor/support',  roles:['Supervisor'], permission:'ReplyContactMessages' },
   { labelAr:'الملف الشخصي',labelEn:'Profile',      icon:'bi-person-circle',    route:'/supervisor/profile',  roles:['Supervisor'] },
   // Teacher
   { labelAr:'الرئيسية',    labelEn:'Dashboard',   icon:'bi-house',            route:'/teacher/dashboard',   roles:['Teacher'] },
@@ -64,11 +66,13 @@ const NAV: NavItem[] = [
   { labelAr:'الواجبات',    labelEn:'Assignments', icon:'bi-clipboard-check',  route:'/student/assignments', roles:['Student'] },
   { labelAr:'التسجيلات',   labelEn:'Recordings',  icon:'bi-play-circle',      route:'/student/videos',      roles:['Student'] },
   { labelAr:'تقاريري',     labelEn:'My Reports',  icon:'bi-graph-up',         route:'/student/reports',     roles:['Student'] },
+  { labelAr:'تواصل مع الإدارة',labelEn:'Contact Admin',icon:'bi-headset',     route:'/student/contact',     roles:['Student'] },
   { labelAr:'الملف الشخصي',labelEn:'Profile',     icon:'bi-person-circle',    route:'/student/profile',     roles:['Student'] },
   // Parent
   { labelAr:'الرئيسية',    labelEn:'Dashboard',   icon:'bi-house',            route:'/parent/dashboard',    roles:['Parent'] },
   { labelAr:'أبنائي',      labelEn:'My Children', icon:'bi-people-fill',      route:'/parent/children',     roles:['Parent'] },
   { labelAr:'المواعيد',    labelEn:'Schedules',   icon:'bi-calendar3',        route:'/parent/schedules',    roles:['Parent'] },
+  { labelAr:'تواصل مع الإدارة',labelEn:'Contact Admin',icon:'bi-headset',     route:'/parent/contact',      roles:['Parent'] },
   { labelAr:'الملف الشخصي',labelEn:'Profile',     icon:'bi-person-circle',    route:'/parent/profile',      roles:['Parent'] },
 ];
 
@@ -323,6 +327,16 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy {
 
     // Contact messages (Admin/Supervisor)
     if (n.referenceType === 'ContactMessage') { this.router.navigate(['/admin/contact']); return; }
+
+    // Support threads → open the exact conversation on the caller's support/contact page
+    if (n.referenceType === 'SupportThread') {
+      const path = role === 'Admin' ? '/admin/support'
+                 : role === 'Supervisor' ? '/supervisor/support'
+                 : role === 'Parent' ? '/parent/contact'
+                 : '/student/contact';
+      this.router.navigate([path], ref ? { queryParams: { thread: ref } } : {});
+      return;
+    }
 
     // Session notifications → student sessions page with the right filter
     if (t === 'SessionScheduled')                { this.router.navigate(['/student/sessions'], { queryParams: { filter: 'upcoming' } }); return; }
